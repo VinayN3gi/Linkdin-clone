@@ -2,16 +2,17 @@ import { View, Text, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } 
 import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 import { app, auth } from '../firebaseconfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 const LoginScreen = ({navigation}:any) => {
 
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
+  const [email,setEmail]=useState<string>("");
+  const [password,setPassword]=useState<string>("");
 
-  const logIn=function()
+  const logIn=function():void
   {
-    if(email!=="" || password!=="")
+    if(email!=="" && password!=="")
     {
       signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -27,7 +28,10 @@ const LoginScreen = ({navigation}:any) => {
     }
     else alert('One of the field is empty')
   }
-
+  const join=function()
+  {
+    navigation.navigate("Sign")
+  }
   return (
     <KeyboardAvoidingView className=' justify-start items-center bg-white h-full'>
       <View className=' justify-center items-center '>
@@ -36,7 +40,7 @@ const LoginScreen = ({navigation}:any) => {
       <Text className='text-4xl mt-5 text-gray-300'>Login</Text>
       <View className='mt-4 bg-gray-200   w-72  h-16 rounded-full  flex-row items-center p-1'>
         <View className='mr-4 ml-3'>
-        <AntDesign name="user" size={24} color="black"/>
+        <Fontisto name="email" size={24} color="black" />
         </View>
          <TextInput placeholder='email...' className=' text-xl ' onChangeText={(text)=>setEmail(text)} value={email}/> 
       </View>
@@ -50,8 +54,8 @@ const LoginScreen = ({navigation}:any) => {
         <Text className=' text-lg text-white'>Log in</Text>
       </TouchableOpacity>
       <View className='mt-6 flex-row justify-center items-center'>
-        <Text className='text-lg text-center font-semibold'>New to linkedin ?</Text>
-        <TouchableOpacity>
+        <Text className='text-lg text-center font-semibold'>New to linkedin ? </Text>
+        <TouchableOpacity onPress={join}>
         <Text className='text-lg text-center text-blue-500 font-semibold underline'>Join now</Text>
         </TouchableOpacity>
       </View>
