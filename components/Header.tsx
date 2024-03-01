@@ -2,7 +2,12 @@ import { View, Text, SafeAreaView, TextInput, TouchableOpacity } from 'react-nat
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 const Header = () => {
+  
+    
+  const navigation:any=useNavigation();  
   return (
    <SafeAreaView>
     <View className='mt-3 h-16 justify-center flex-row  bg-white items-center rounded-md '>
@@ -18,7 +23,7 @@ const Header = () => {
             </View>
         </View>
         <View className='flex-2  h-full w-12 justify-center items-center'>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate("Message")}>
             <AntDesign name="message1" size={24} color="black" />
             </TouchableOpacity>
         </View>
