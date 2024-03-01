@@ -1,38 +1,56 @@
 import { View, Text, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { auth } from '../firebaseconfig';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../firebaseconfig';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { collection, addDoc } from "firebase/firestore"; 
+
+
+
+
 const SignScreen = ({navigation}:any) => {
 
   const [name,setName]=useState<string>("");
   const [email,setEmail]=useState<string>("");
   const [password,setPassword]=useState<string>("");
-
+  
   const join=function()
   {
     if(name!=="" && password!=="" && email!=="")
     {
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed up 
             const user = userCredential.user;
-            navigation.replace("Home")
-            console.log("Success")
+            store();
             // ...
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            alert(error)
             // ..
         });
     }
     else alert("One of the field is empty")
   }  
 
+
+  const store=async function()
+  {
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+       name:name,
+       id:auth.currentUser?.uid
+      });
+      console.log("Document written with ID: ", docRef.id);
+      navigation.navigate("Home");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+    
+  }
 
   return (
     <KeyboardAvoidingView className=' justify-start items-center bg-white h-full'>
