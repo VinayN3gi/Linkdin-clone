@@ -42,7 +42,7 @@ const LoginScreen = ({navigation}:any) => {
         <View className='mr-4 ml-3'>
         <Fontisto name="email" size={24} color="black" />
         </View>
-         <TextInput placeholder='email...' className=' text-xl ' onChangeText={(text)=>setEmail(text)} value={email}/> 
+         <TextInput autoFocus placeholder='email...' className=' text-xl ' onChangeText={(text)=>setEmail(text)} value={email}/> 
       </View>
       <View className='mt-4 bg-gray-200   w-72  h-16 rounded-full  flex-row items-center p-1'>
         <View className='mr-4 ml-3'>
