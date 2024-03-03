@@ -1,7 +1,7 @@
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
-import { addDoc, collection, getDocs } from "firebase/firestore"; 
+import { addDoc, collection, getDocs, serverTimestamp } from "firebase/firestore"; 
 import { auth, db } from '../firebaseconfig';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -10,8 +10,37 @@ import { useNavigation } from '@react-navigation/native';
 const PostModal = () => {
 
   const [image,setImage]=useState<string>("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg")
+  const [name,setName]=useState<string>("");
   const navigation:any=useNavigation();  
-  const [desc,setDesc]=useState<string>("")
+  const [desc,setDesc]=useState<string>("");
+  const id:string=auth.currentUser?.uid ? auth.currentUser.uid :"No user" 
+
+  useEffect(()=>{
+    const retrive=async function() {
+        let value="";
+        try {
+            const querySnapshot = await getDocs(collection(db, "users"));
+            querySnapshot.forEach((doc) => {
+              if(doc.data().id===id)
+              {
+                value=doc.data().name
+              }
+            });
+            console.log(value);
+            setName(value)
+        } 
+        catch (error) {
+            alert(error)
+        }
+    }
+    retrive()
+  },[])  
+
+
+
+
+
+
   const uploadImage=async function():Promise<void>
   {
     try {
@@ -34,10 +63,12 @@ const PostModal = () => {
   const store=async function() {
     try {
         const docRef = await addDoc(collection(db, "post"), {
-          first: auth.currentUser?.uid,
+          id: auth.currentUser?.uid,
           desc:desc,
-          imageUri:image,
-          key:Math.random()*100000
+          photoUrl:image,
+          key:Math.random()*100000,
+          name:name,
+          time:serverTimestamp()
         });
         console.log("Document written with ID: ", docRef.id);
         navigation.navigate("Home")
