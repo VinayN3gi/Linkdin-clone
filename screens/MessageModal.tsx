@@ -13,6 +13,7 @@ const MessageModal = ({navigation,route}:any) => {
     key:number
   }
   const {id}=route.params;
+  const {name}=route.params;
   const [message,setMessage]=useState<string>("");
   const [retriveData,setData]=useState<Data[]>([]) ;
   const uid:string= auth.currentUser?.uid ? auth.currentUser.uid : "No user";
@@ -20,15 +21,13 @@ const MessageModal = ({navigation,route}:any) => {
     const retrive=async function()
     {
       const value:Data[]=[];
-      const querySnapshot=await getDocs(collection(db,id));
+      const querySnapshot=await getDocs(collection(db,uid));
       querySnapshot.forEach((doc)=>{
-        console.log(doc.data())
         const id=doc.data().id
         const message=doc.data().message
         const key=doc.data().key
         value.push({id:id,message:message,key:key})  
       })
-      console.log(value);
       setData(value)
     }
     retrive()
