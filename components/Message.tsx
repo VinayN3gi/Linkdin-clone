@@ -12,7 +12,7 @@ const Message = ({item}:any,) => {
     {
         navigation.navigate("MessageModal",item)
     }
-
+    
     if(auth.currentUser?.uid!==item.id)
     {
         return(
