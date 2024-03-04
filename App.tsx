@@ -6,6 +6,7 @@ import SignScreen from './screens/SignScreen';
 import MessageScreen from './screens/MessageScreen';
 import MessageModal from './screens/MessageModal';
 import PostModal from './screens/PostModal';
+import ProfileModal from './screens/ProfileModal';
 
 export default function App() {
   const Stack=createNativeStackNavigator()
@@ -21,6 +22,7 @@ export default function App() {
         <Stack.Group screenOptions={{presentation:"transparentModal"}}>
           <Stack.Screen name="MessageModal" component={MessageModal} options={{headerShown:false}}/>
           <Stack.Screen name="PostModal" component={PostModal} options={{headerShown:false}}/>
+          <Stack.Screen name="ProfileModal" component={ProfileModal} options={{headerShown:false}}/>
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

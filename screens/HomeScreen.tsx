@@ -43,7 +43,6 @@ const HomeScreen = () => {
         const name=doc.data().name
         value.push({id:id,desc:desc,photoUrl:photoUrl,key:key,name:name})
       });
-      console.log(value);
       setPost(value)
      } 
      catch (error) {

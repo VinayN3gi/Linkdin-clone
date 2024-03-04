@@ -11,9 +11,9 @@ const Header = () => {
   return (
    <SafeAreaView>
     <View className='mt-3 h-16 justify-center flex-row  bg-white items-center rounded-md '>
-        <View className=' ml-2 mr-2 bg-gray-300 w-10 h-10 justify-center items-center rounded-full flex-2'>
+        <TouchableOpacity className=' ml-2 mr-2 bg-gray-300 w-10 h-10 justify-center items-center rounded-full flex-2' onPress={()=>navigation.navigate("ProfileModal")}>
             <AntDesign name="user" size={24} color="black"/>
-        </View>
+        </TouchableOpacity>
         <View className='flex-1 justify-center h-full'>
             <View className=' mr-2 bg-gray-200 ml-2 h-10  justify-center rounded-lg flex-row'>
             <TouchableOpacity className=' justify-center mr-2 items-center ml-2'>
