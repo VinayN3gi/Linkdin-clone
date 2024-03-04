@@ -7,6 +7,7 @@ import MessageScreen from './screens/MessageScreen';
 import MessageModal from './screens/MessageModal';
 import PostModal from './screens/PostModal';
 import ProfileModal from './screens/ProfileModal';
+import UserPosts from './screens/UserPosts';
 
 export default function App() {
   const Stack=createNativeStackNavigator()
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Message" component={MessageScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Sign" component={SignScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="UserPosts" component={UserPosts} options={{headerShown:false}}/>
         </Stack.Group>
         <Stack.Group screenOptions={{presentation:"transparentModal"}}>
           <Stack.Screen name="MessageModal" component={MessageModal} options={{headerShown:false}}/>

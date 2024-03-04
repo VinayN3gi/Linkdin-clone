@@ -8,14 +8,6 @@ import { db } from '../firebaseconfig'
 
 
 const HomeScreen = () => {
-  type PostData={
-    username:string,
-    info:string,
-    description:string,
-    id:string,
-    photoUrl:string
-  }
-
   type RetriveData={
     id:string,
     desc:string,
@@ -54,28 +46,6 @@ const HomeScreen = () => {
   },[])
 
 
-  const dummyData:PostData[]=[{
-    username:"User 1",
-    info:"Mobile app developer",
-    description:"I have completed the work on my latest project",
-    id:"aaaa",
-    photoUrl:"https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
-  },
-  {
-    username:"User 2",
-    info:"Backend developer",
-    description:"Just use php bro",
-    id:"bbbb",
-    photoUrl:"https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
-  },
-  {
-    username:"User 3",
-    info:"Frontend developer",
-    description:"Ai will take over my job",
-    id:"cccc",
-    photoUrl:"https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
-  }
-  ]
 
   const render=function(item:RetriveData)
   {
